@@ -49,15 +49,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(bagsIntent);
             }
         });
-
-
-
-        /* UI: */
-
-        /* Data/Backend: */
-        // TODO: Create a Java class (Model in MVC setup) that deals with sending request
-        // TODO: Have a method that sends a GET request to: https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6
-        // TODO: Have a method that parses response to look for customer "Napoleon Batz"
-        // TODO: Have a method that parses response to look for "Awesome Bronze Bags"
     }
 }
