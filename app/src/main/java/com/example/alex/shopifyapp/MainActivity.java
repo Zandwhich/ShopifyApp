@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 napoleonBatz.setTextColor(Color.BLUE);
-                System.out.println("I'm clicked.");
                 startActivity(napoleonIntent);
             }
         });
