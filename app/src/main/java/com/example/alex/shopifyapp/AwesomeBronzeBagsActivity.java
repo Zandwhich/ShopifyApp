@@ -25,10 +25,8 @@ public class AwesomeBronzeBagsActivity extends AppCompatActivity {
         final TextView title = (TextView) findViewById(R.id.textView_BagsTitle);
         final TextView number = (TextView) findViewById(R.id.textView_BagsNumber);
 
-        String url = "https://www.shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
+        String url = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        System.out.println("About to add all the fun stuff");
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -42,13 +40,17 @@ public class AwesomeBronzeBagsActivity extends AppCompatActivity {
                             for (int i = 0; i < orders.length(); i++)
                             {
                                 JSONObject order = orders.getJSONObject(i);
-                                JSONArray items = order.getJSONArray("line_items");
-                                for (int j = 0; j < items.length(); j++)
+                                if (order.has("line_items"))
                                 {
-                                    JSONObject item = items.getJSONObject(j);
-                                    if (item.getString("title").equals("Awesome Bronze Bag"))
+                                    JSONArray items = order.getJSONArray("line_items");
+                                    for (int j = 0; j < items.length(); j++)
                                     {
-                                        numBags++;
+                                        JSONObject item = items.getJSONObject(j);
+                                        if (item.has("title") &&
+                                                item.getString("title").equals("Awesome Bronze Bag"))
+                                        {
+                                            numBags++;
+                                        }
                                     }
                                 }
                             }

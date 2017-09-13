@@ -20,7 +20,7 @@
         android:id="@+id/textView_BagsNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nothing for now"
+        android:text="UNABLE TO GET DATA"
         app:layout_constraintTop_toBottomOf="@+id/textView_BagsTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

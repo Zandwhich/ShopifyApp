@@ -27,10 +27,8 @@ public class NapoleonBatzActivity extends AppCompatActivity {
         final TextView title = (TextView) findViewById(R.id.textView_NapoleonTitle);
         final TextView number = (TextView) findViewById(R.id.textView_NapoleonNumber);
 
-        String url = "https://www.shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
+        String url = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        System.out.println("About to add all the fun stuff");
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
             new Response.Listener<String>() {
@@ -44,14 +42,22 @@ public class NapoleonBatzActivity extends AppCompatActivity {
                         for (int i = 0; i < orders.length(); i++)
                         {
                             JSONObject order = orders.getJSONObject(i);
-                            JSONObject customer = order.getJSONObject("customer");
-                            if (customer.getString("first_name").equals("Napoleon") &&
-                                    customer.getString("lat_name").equals("Batz"))
+                            if (order.has("customer"))
                             {
-                                price += order.getDouble("total_price");
+                                JSONObject customer = order.getJSONObject("customer");
+                                if (customer.has("first_name") &&
+                                        customer.getString("first_name").equals("Napoleon") &&
+                                        customer.has("last_name") &&
+                                        customer.getString("last_name").equals("Batz"))
+                                {
+                                    if (order.has("total_price"))
+                                    {
+                                        price += order.getDouble("total_price");
+                                    }
+                                }
                             }
                         }
-                        number.setText("" + price);
+                        number.setText("CAD$" + price);
                     }
                     catch (JSONException e){
                         System.out.println("There was an error with parsing the JSON.");
